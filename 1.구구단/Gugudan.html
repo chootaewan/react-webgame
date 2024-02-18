@@ -21,7 +21,7 @@
     const onSubmitForm = (e) => {
       e.preventDefault();
       if (parseInt(value) === first * second) {
-        setResult('정답');
+        setResult('정답: ' + value);
         setFirst(Math.ceil(Math.random() * 9));
         setSecond(Math.ceil(Math.random() * 9));
         setValue('');
@@ -32,7 +32,7 @@
         inputEl.current.focus();
       }
     };
-    return (
+    return ( //리액트에선 태그 요소에 class -> className, for -> htmlFor로 써줘야 한다.
       <React.Fragment>
         <div>{first} 곱하기 {second}는?</div>
         <form onSubmit={onSubmitForm}>

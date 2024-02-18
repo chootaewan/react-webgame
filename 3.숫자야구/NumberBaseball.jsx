@@ -85,8 +85,32 @@ const NumberBaseball = () => {
       </form>
       <div>시도: {tries.length}</div>
       <ul>
+        {/*[[사과, 맛있다],
+        [배, 달다],
+        [딸기, 상큼하다],
+        [레몬, 시다],
+        [떫은감, 떫다], 이런식의 배열로 나타내는것이 있고,
+        
+      ].map((v) => {
+        retrun (
+          <li><b>{v[0]}</b> - {v[1]}</li>
+        )
+      }) 
+      
+        [{fruit: 사과, taste: 맛있다},
+        {fruit: 배, taste: 달다},
+        {fruit: 딸기, taste: 상큼하다},
+        {fruit: 레몬, taste: 시다},
+        {fruit: 감, taste: 떫다}, 이런식의 객체로 나타내는 방법이 있다.
+        
+      ].map((v) => {
+        retrun (
+          <li><b>{v.fruit}</b> - {v.taste}</li>
+        )
+      }) 
+         */}
         {tries.map((v, i) => (
-          <Try key={`${i + 1}차 시도 : ${v.try}`} tryInfo={v}/>
+          <Try key={`${i + 1}차 시도 : ${v.try}`} tryInfo={v} /* 리액트가 key를 보고 같은 컴포넌트인지 판단한다. *//>
         ))}
       </ul>
     </>

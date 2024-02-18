@@ -2,7 +2,7 @@ const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-  name: 'number-baseball-dev',
+  name: 'word-relay-dev',
   mode: 'development',
   devtool: 'inline-source-map',
   resolve: {
@@ -24,7 +24,7 @@ module.exports = {
           '@babel/preset-react',
         ],
         plugins: ['react-refresh/babel'],
-      },
+      }, // hot 로더는 기존데이터를 보존하면서 리로드된다. 
       exclude: path.join(__dirname, 'node_modules'),
     }],
   },

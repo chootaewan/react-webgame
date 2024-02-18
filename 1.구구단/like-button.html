@@ -7,10 +7,26 @@
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <!--<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>-->
 <!--<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>-->
-<script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
   'use strict';
 
-  const e = React.createElement;
+
+  const LikeButton = () => { //함수형 컴포넌트 X, 함수 컴포넌트 O
+    // this 쓸일이 없다.
+    const [liked, setLiked] = React.useState(false); // 구조 분해
+
+    if (liked) {
+      return 'You liked this.';
+    }
+    return (
+      <button onClick={()=> { setLiked(true); }}>Like</button>
+    );
+  }
+
+  // 3. 객체를 함부로 바꾸지 마라.
+  /* const e = React.createElement;
 
   class LikeButton extends React.Component {
     constructor(props) {
@@ -25,9 +41,9 @@
 
       return e('button', {onClick: () => this.setState({liked: true})}, 'Like');
     }
-  }
+  } */
 </script>
-<script>
+<script type="text/babel">
   ReactDOM.render(e(LikeButton), document.querySelector('#root'));
 </script>
 </body>

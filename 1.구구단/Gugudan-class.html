@@ -17,13 +17,21 @@
       result: '',
     };
 
-    onSubmit = (e) => {
+    /* 
+    위 class랑 비교해서 보자. 
+    const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+    const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+    const [value, setValue] = React.useState('');
+    const [result, setResult] = React.useState(''); 
+    */
+
+    onSubmit = (e) => { // class의 메서드로 쓰자.
       e.preventDefault();
       if (parseInt(this.state.value) === this.state.first * this.state.second) {
-        this.setState((prevState) => {
+        this.setState((prevState) => { //prevState는 예전 값.
           return {
             result: '정답: ' + prevState.value,
-            first: Math.ceil(Math.random() * 9),
+            first: Math.ceil(Math.random() * 9), // setState에 바뀌는 부분만 커스텀으로 넣을수 있다.
             second: Math.ceil(Math.random() * 9),
             value: '',
           };
@@ -38,7 +46,7 @@
       }
     };
 
-    onChange = (e) => {
+    onChange = (e) => { // 화살표 함수로 써야 this가 바뀌지 않는다.
       this.setState({ value: e.target.value });
     };
 
@@ -48,9 +56,9 @@
 
     // 컨텐츠
     render() {
-      return (
+      return ( //XML은 싱글 태그 일때, </>닫는 태그를 해줘야 한다.
         <React.Fragment>
-          <div>{this.state.first} 곱하기 {this.state.second}는?</div>
+          <div>{this.state.first} 곱하기 {this.state.second}는?</div> 
           <form onSubmit={this.onSubmit}>
             <input ref={this.onRefInput} type="number" value={this.state.value} onChange={this.onChange}/>
             <button>입력!</button>
@@ -63,7 +71,7 @@
 
 </script>
 <script type="text/babel">
-  ReactDOM.render(<GuGuDan/>, document.querySelector('#root'));
+  ReactDOM.render(<div><GuGuDan/></div>, document.querySelector('#root'));
 </script>
 </body>
 </html>
