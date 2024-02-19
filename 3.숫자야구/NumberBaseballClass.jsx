@@ -79,7 +79,7 @@ class NumberBaseball extends Component {
 
   inputRef = createRef(); // this.inputRef
 
-  render() {
+  render() { //render 안에는 this.setState를 쓰는게 아니다. 브라우져에서 무한 렌더링이 발생한다.
     const { result, value, tries } = this.state;
     return (
       <>

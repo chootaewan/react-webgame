@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
 
-const Ball = memo(({ number }) => {
+const Ball = memo(({ number }) => { //HOC 고차 컴포넌트
   let background;
-  if (number <= 10) {
+  if (number <= 10) { //10 이하는 빨간색
     background = 'red';
-  } else if (number <= 20) {
+  } else if (number <= 20) { //20이하는 주황색
     background = 'orange';
-  } else if (number <= 30) {
+  } else if (number <= 30) { // 30이하는 노란색
     background = 'yellow';
-  } else if (number <= 40) {
+  } else if (number <= 40) { //40이하는 파란색
     background = 'blue';
-  } else {
+  } else { // 그외는 녹색
     background = 'green';
   }
 

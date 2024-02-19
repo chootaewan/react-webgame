@@ -15,7 +15,7 @@ export const CODE = {
 
 export const TableContext = createContext({
   tableData: [],
-  halted: true,
+  halted: true, //halted는 중단 한다는 뜻.
   dispatch: () => {},
 });
 
@@ -37,7 +37,7 @@ const plantMine = (row, cell, mine) => {
   const candidate = Array(row * cell).fill().map((arr, i) => {
     return i;
   });
-  const shuffle = [];
+  const shuffle = []; //셔플에 0~99까지 칸에 20개의 지뢰가 섞여 들어가있다.
   while (candidate.length > row * cell - mine) {
     const chosen = candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0];
     shuffle.push(chosen);
@@ -224,7 +224,7 @@ const MineSearch = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { tableData, halted, timer, result } = state;
 
-  const value = useMemo(() => ({ tableData, halted, dispatch }), [tableData, halted]);
+  const value = useMemo(() => ({ tableData, halted, dispatch }), [tableData, halted]); //캐싱을 해준것이다. 리렌더링을 막기 위한것.
 
   useEffect(() => {
     let timer;
@@ -239,7 +239,7 @@ const MineSearch = () => {
   }, [halted]);
 
   return (
-    <TableContext.Provider value={value}>
+    <TableContext.Provider value={value}> { /* 객체가 새로 생기지 않게 value를 따로 useMemo()를 써서 변수 지정을 해주면 리렌더링을 하지 않게 된다. */ }
       <Form />
       <div>{timer}</div>
       <Table />

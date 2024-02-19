@@ -19,7 +19,7 @@ export const RESET_GAME = 'RESET_GAME';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case SET_WINNER:
+    case SET_WINNER: //액션을 변수화 시켜주자.
       // state.winner = action.winner; 이렇게 하면 안됨.
       return {
         ...state,
@@ -27,8 +27,8 @@ const reducer = (state, action) => {
       };
     case CLICK_CELL: {
       const tableData = [...state.tableData];
-      tableData[action.row] = [...tableData[action.row]]; // immer라는 라이브러리로 가독성 해결
-      tableData[action.row][action.cell] = state.turn;
+      tableData[action.row] = [...tableData[action.row]]; // immer라는 라이브러리로 가독성 해결. 불변성을 지켜줘야한다.
+      tableData[action.row][action.cell] = state.turn; // 최근에 클릭한 셀을 기억.
       return {
         ...state,
         tableData,
@@ -66,7 +66,7 @@ const TicTacToe = () => {
   // const [tableData, setTableData] = useState([['', '', ''], ['', '', ''], ['', '', '']]);
 
   const onClickTable = useCallback(() => {
-    dispatch({ type: SET_WINNER, winner: 'O' });
+    dispatch({ type: SET_WINNER, winner: 'O' }); //{ type: SET_WINNER, winner: 'O' }는 액션 객체가 되는것이고, dispatch는 액션을 실행하는것이다.
   }, []);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const TicTacToe = () => {
     if (row < 0) {
       return;
     }
-    let win = false;
+    let win = false; // 여시거 부터 밑에 4가지 조건은 승리 조건을 확인하는 것이다.
     if (tableData[row][0] === turn && tableData[row][1] === turn && tableData[row][2] === turn) {
       win = true;
     }
@@ -92,7 +92,7 @@ const TicTacToe = () => {
       dispatch({ type: SET_WINNER, winner: turn });
       dispatch({ type: RESET_GAME });
     } else {
-      let all = true; // all이 true면 무승부라는 뜻
+      let all = true; // all이 true면 무승부라는 뜻. 칸이 다 차있으면 무승부
       tableData.forEach((row) => { // 무승부 검사
         row.forEach((cell) => {
           if (!cell) {

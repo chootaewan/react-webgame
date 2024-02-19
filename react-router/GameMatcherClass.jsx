@@ -5,9 +5,10 @@ import RSP from '../5.가위바위보/RSPClass';
 import Lotto from '../6.로또/LottoClass';
 import {Route, Routes, useLocation} from "react-router";
 
+
 class GameMatcher extends Component {
   render() {
-    let urlSearchParams = new URLSearchParams(this.props.location.search.slice(1));
+    let urlSearchParams = new URLSearchParams(this.props.location.search.slice(1));//브라우저에서 쿼리스트링은 location안에 search에 나타내어진다.
     console.log(urlSearchParams.get('page'));
     return (
       <Routes>

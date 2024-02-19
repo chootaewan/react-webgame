@@ -7,7 +7,8 @@ const ResponseCheck = () => {
   const timeout = useRef(null);
   const startTime = useRef(0);
   const endTime = useRef(0);
-
+  // this의 속성들을 Ref가 표현해준다.
+  // ref는 current로 접근을 해야한다.
   const onClickScreen = useCallback(() => {
     if (state === 'waiting') {
       timeout.current = setTimeout(() => {

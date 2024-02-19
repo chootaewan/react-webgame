@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import useInterval from './useInterval';
 
 const rspCoords = {
   바위: '0',
@@ -44,16 +45,17 @@ const RSP = () => {
   const [result, setResult] = useState('');
   const [imgCoord, setImgCoord] = useState(rspCoords.바위);
   const [score, setScore] = useState(0);
-  const interval = useRef();
+  const [isRunning, setIsRunning] = useState(true);
 
-  useEffect(() => { // componentDidMount, componentDidUpdate 역할(1대1 대응은 아님)
+
+  /* useEffect(() => { // componentDidMount, componentDidUpdate 역할(1대1 대응은 아님)
     console.log('다시 실행');
     interval.current = setInterval(changeHand, 100);
     return () => { // componentWillUnmount 역할
       console.log('종료');
-      clearInterval(interval.current);
+      clearInterval(interval.current); //매번 clearInterval을 하기에, setTimeout을 하는것과 같다.
     }
-  }, [imgCoord]);
+  }, [imgCoord]); //배열에 imgCoord를 넣어줌으로써 componentDidUpdate랑 같은 효과를 낸다. 배열엔 useEffect를 다시 실행할 값만 넣어야 한다. */
 
   const changeHand = () => {
     if (imgCoord === rspCoords.바위) {
@@ -65,10 +67,11 @@ const RSP = () => {
     }
   };
 
+  useInterval(changeHand, isRunning ? 100 : null);
+
   const onClickBtn = (choice) => () => {
-    if (interval.current) {
-      clearInterval(interval.current);
-      interval.current = null;
+    if (isRunning) {
+      setIsRunning(false);
       const myScore = scores[choice];
       const cpuScore = scores[computerChoice(imgCoord)];
       const diff = myScore - cpuScore;
@@ -82,7 +85,7 @@ const RSP = () => {
         setScore((prevScore) => prevScore - 1);
       }
       setTimeout(() => {
-        interval.current = setInterval(changeHand, 100);
+        setIsRunning(true);
       }, 1000);
     }
   };

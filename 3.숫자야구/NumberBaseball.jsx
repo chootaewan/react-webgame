@@ -12,7 +12,7 @@ const getNumbers = () => {
 };
 
 const NumberBaseball = () => {
-  const [answer, setAnswer] = useState(getNumbers());
+  const [answer, setAnswer] = useState(getNumbers);//lazy init이라하여 늦은 초기화라고 한다.
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
   const [tries, setTries] = useState([]);
@@ -31,7 +31,7 @@ const NumberBaseball = () => {
       setResult('홈런!');
       alert('게임을 다시 실행합니다.');
       setValue('');
-      setAnswer(getNumbers());
+      setAnswer(getNumbers());//여기서는 ()함수로 써줘야한다. array를 받아와야 하기 때문이다.
       setTries([]);
       inputEl.current.focus();
     } else {

@@ -38,7 +38,7 @@ class Lotto extends Component {
     this.timeouts[6] = setTimeout(() => {
       this.setState({
         bonus: winNumbers[6],
-        redo: true,
+        redo: true, //보너스 번호가 생긴,후 7초 뒤 다시 버튼을 생성하기 위해 만들었다.
       });
     }, 7000);
   };
@@ -51,8 +51,8 @@ class Lotto extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log('didUpdate');
-    if (this.state.winBalls.length === 0) {
-      this.runTimeouts();
+    if (this.state.winBalls.length === 0) { //이 조건 떄문에 this.runTimeouts()가 실행이 안되는것.
+      this.runTimeouts(); //winBalls: []가 0이 되었을때 실행 된다.
     }
     if (prevState.winNumbers !== this.state.winNumbers) {
       console.log('로또 숫자를 생성합니다.');
@@ -73,7 +73,7 @@ class Lotto extends Component {
       bonus: null, // 보너스 공
       redo: false,
     });
-    this.timeouts = [];
+    this.timeouts = []; //state가 초기화 되는 것이다.
   };
 
   render() {

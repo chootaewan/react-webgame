@@ -36,7 +36,7 @@ const getTdText = (code) => {
     case CODE.NORMAL:
       return '';
     case CODE.MINE:
-      return 'X';
+      return 'X'; // 디버깅을 위해 X 표시를 해놓았지만 나중엔 X를 없애면 된다.
     case CODE.CLICKED_MINE:
       return '펑';
     case CODE.FLAG_MINE:

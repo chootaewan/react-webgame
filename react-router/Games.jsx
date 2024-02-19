@@ -21,7 +21,7 @@ const Games = () => {
         </Routes>
       </div>
     </BrowserRouter>
-  );
+  ); //<Switch>는 첫번째 칠드런만 렌더링을 한다. 없으면 페이지에 주르륵 나온다. reactrouter v6에선 <Routes></Routes>로 바귀었다.
 };
 
 export default Games;

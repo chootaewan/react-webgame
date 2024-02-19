@@ -25,7 +25,7 @@ class ResponseCheck extends Component {
         state: 'ready',
         message: '초록색이 되면 클릭하세요.',
       });
-    } else if (state === 'ready') { // 성급하게 클릭
+    } else if (state === 'ready') { // 성급하게 클릭.
       clearTimeout(this.timeout);
       this.setState({
         state: 'waiting',

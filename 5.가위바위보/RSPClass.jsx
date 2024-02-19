@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-// 클래스의 경우 -> constructor -> render -> ref -> componentDidMount
-// (setState/props 바뀔때) -> shouldComponentUpdate(true) -> render -> componentDidUpdate
+//  클래스의 경우 -> constructor -> render -> ref -> componentDidMount
+// (setState/props 바뀔때) 마다 -> shouldComponentUpdate(true) -> render -> componentDidUpdate
 // 부모가 나를 없앴을 때 -> componentWillUnmount -> 소멸
 
 const rspCoords = {
@@ -32,7 +32,11 @@ class RSP extends Component {
   interval;
 
   componentDidMount() { // 컴포넌트가 첫 렌더링된 후, 여기에 비동기 요청을 많이 해요
-    this.interval = setInterval(this.changeHand, 100);
+    this.interval = setInterval(this.changeHand, 100); //setInterval을 없애지 않으면 계속 인터벌 작업이 되고, 메모리도 잡아먹기 때문에 componentDidMount, componentWillUnmount를 통해서 없애줘야한다.
+  }
+
+  componentDidUpdate() { // 리렌더링 후,
+
   }
 
   componentWillUnmount() { // 컴포넌트가 제거되기 직전, 비동기 요청 정리를 많이 해요
@@ -56,7 +60,7 @@ class RSP extends Component {
     }
   };
 
-  onClickBtn = (choice) => () => {
+  onClickBtn = (choice) => () => { 
     const {imgCoord} = this.state;
     clearInterval(this.interval);
     const myScore = scores[choice];
@@ -92,7 +96,7 @@ class RSP extends Component {
       <>
         <div id="computer" style={{ background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0` }} />
         <div>
-          <button id="rock" className="btn" onClick={this.onClickBtn('바위')}>바위</button>
+          <button id="rock" className="btn" onClick={this.onClickBtn('바위')}>바위</button>{/* onClick={()=> this.onClickBtn('바위')를 간단하게 하려면, 화살표 함수를 빼서  onClickBtn 메서드에 넣어주면 된다. onClickBtn = (choice) => () => {}*/}
           <button id="scissor" className="btn" onClick={this.onClickBtn('가위')}>가위</button>
           <button id="paper" className="btn" onClick={this.onClickBtn('보')}>보</button>
         </div>
